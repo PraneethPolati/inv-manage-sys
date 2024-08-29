@@ -18,23 +18,27 @@ const Login = () => {
   const [error, setError] = useState(null);
   const { login } = useAuth();
   const navigate = useNavigate();
+  
+  const loginApi = async ({ username, password }) => {
+    const response = await fetch('/api/users/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
+    if (!response.ok) {
+      throw new Error('Login failed');
+    }
+    return response.json();
+  };
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-      });
-      const data = await response.json();
-      if (response.ok) {
-        login(data.token); // Use the login function from context
-        navigate('/'); // Redirect to home or other protected page
-      } else {
-        setError(data.message);
-      }
+      const data = await loginApi({ username, password });
+      login(data.token); 
+      navigate('/');
     } catch (err) {
       setError('Login failed');
     } finally {

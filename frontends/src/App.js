@@ -11,7 +11,7 @@ import Login from './pages/Login';
 import Navbar from './components/Navbar';
 import theme from './theme/theme';
 import Reporting from './pages/Reporting';
-
+import ProtectedRoute from './components/ProtectedRoute';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from './contexts/AuthContext';
 
@@ -26,19 +26,21 @@ function App() {
         <Routes>
          
           
-          {/* Public Route for Login */}
-          <Route path="/login" element={token ? <Navigate to="/" /> : <Login />} />
-         
-         
-         <Route path="/" element={<Home />}  />
-          <Route path="/products" element= {<Products />} />
-          <Route path="/orders" element={<Orders />}  />
-          <Route path="/suppliers" element={<Suppliers />}  />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/reporting" element= {<Reporting />}  />
+           {/* Redirect to login if the user is not authenticated */}
+           <Route path="/" element={token ? <Home /> : <Navigate to="/login" />} />
 
-           {/* Redirect any unknown routes to home */}
-           <Route path="*" element={<Navigate to="/" />} />
+{/* Public Route for Login */}
+<Route path="/login" element={token ? <Navigate to="/" /> : <Login />} />
+
+{/* Protected Routes */}
+<Route path="/products" element={<ProtectedRoute element={<Products />} />} />
+<Route path="/orders" element={<ProtectedRoute element={<Orders />} />} />
+<Route path="/suppliers" element={<ProtectedRoute element={<Suppliers />} />} />
+<Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
+<Route path="/reporting" element={<ProtectedRoute element={<Reporting />} />} />
+
+{/* Fallback for undefined routes */}
+<Route path="*" element={<Navigate to="/" />} />
          </Routes>  
     </ThemeProvider>
   );

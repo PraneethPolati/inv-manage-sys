@@ -5,6 +5,7 @@ const OrderList = () => {
   const orders = [
     { id: 1, product: 'Product 1', quantity: 10, status: 'Pending' },
     { id: 2, product: 'Product 2', quantity: 5, status: 'Completed' },
+    
     // Add more orders as needed
   ];
 
