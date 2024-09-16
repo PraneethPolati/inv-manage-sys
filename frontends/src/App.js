@@ -27,17 +27,17 @@ function App() {
          
           
            {/* Redirect to login if the user is not authenticated */}
-           <Route path="/" element={token ? <Home /> : <Navigate to="/login" />} />
+           
 
 {/* Public Route for Login */}
 <Route path="/login" element={token ? <Navigate to="/" /> : <Login />} />
 
 {/* Protected Routes */}
-<Route path="/products" element={<ProtectedRoute element={<Products />} />} />
-<Route path="/orders" element={<ProtectedRoute element={<Orders />} />} />
-<Route path="/suppliers" element={<ProtectedRoute element={<Suppliers />} />} />
-<Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
-<Route path="/reporting" element={<ProtectedRoute element={<Reporting />} />} />
+<Route path="/products" element={<Products />}  />
+<Route path="/orders" element={<Orders />} />
+<Route path="/suppliers" element={<Suppliers />}  />
+<Route path="/dashboard" element={<Dashboard />}  />
+<Route path="/reporting" element={<Reporting />} />
 
 {/* Fallback for undefined routes */}
 <Route path="*" element={<Navigate to="/" />} />
