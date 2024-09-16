@@ -27,7 +27,7 @@ function App() {
          
           
            {/* Redirect to login if the user is not authenticated */}
-           
+           <Route path="/" element={token ? <Home /> : <Navigate to="/login" />} />
 
 {/* Public Route for Login */}
 <Route path="/login" element={token ? <Navigate to="/" /> : <Login />} />
