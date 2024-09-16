@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 
 function ProtectedRoute({ element }) {
   const { token } = useAuth();
-  
+  console.log('ProtectedRoute token:', token); // Debug log
   return token ? element : <Navigate to="/login" />;
 }
 

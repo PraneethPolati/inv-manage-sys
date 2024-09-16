@@ -21,8 +21,8 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      
-        <Navbar />
+      <Router>
+        
         <Routes>
          
           
@@ -42,7 +42,9 @@ function App() {
 {/* Fallback for undefined routes */}
 <Route path="*" element={<Navigate to="/" />} />
          </Routes>  
+         </Router>
     </ThemeProvider>
+
   );
 }
 
